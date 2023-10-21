@@ -1,0 +1,117 @@
+network unknown {
+}
+variable CPU_Usage {
+    type discrete [ 3 ] { High, Medium, Low };
+}
+variable Chosen_CPU {
+    type discrete [ 5 ] { Intel_I9_11900K, AMD_Ryzen_7_5800X, Intel_I7_101700K, Intel_I5_11600K, Intel_I3_10100 };
+}
+variable Chosen_GPU {
+    type discrete [ 5 ] { NVIDEA_RTX_3090, AMD_RX_6800XT, NVIDIA_GTX_1660, AMD_RX_6600XT, NVIDIA_GTX_1650_Super };
+}
+variable Chosen_RAM {
+    type discrete [ 5 ] { Crucial_Ballistix_64GB_DDR4, Patriot_Viper_Steel_32GB_DDR4, Kingston_HyperX__16GB_DDR4, Corsair_Vengeance_LPX_8GB_DDR4, Crucial_Ballistix_4GB_DDR4 };
+}
+variable GPU_Usage {
+    type discrete [ 3 ] { High, Medium, Low };
+}
+variable Price {
+    type discrete [ 3 ] { High, Medium, Low };
+}
+variable RAM_Usage {
+    type discrete [ 3 ] { High, Medium, Low };
+}
+variable Usage {
+    type discrete [ 4 ] { General, Programing, VideoEditing, Gaming };
+}
+probability ( CPU_Usage | Price, Usage ) {
+    ( High, General ) 0.5, 0.35, 0.15;
+    ( High, Programing ) 0.6, 0.3, 0.1;
+    ( High, VideoEditing ) 0.8, 0.15, 0.05;
+    ( High, Gaming ) 0.9, 0.07, 0.03;
+    ( Medium, General ) 0.15, 0.6, 0.25;
+    ( Medium, Programing ) 0.2, 0.6, 0.2;
+    ( Medium, VideoEditing ) 0.3, 0.6, 0.1;
+    ( Medium, Gaming ) 0.35, 0.55, 0.1;
+    ( Low, General ) 0.05, 0.25, 0.7;
+    ( Low, Programing ) 0.07, 0.33, 0.6;
+    ( Low, VideoEditing ) 0.15, 0.35, 0.5;
+    ( Low, Gaming ) 0.1, 0.4, 0.5;
+
+}
+probability ( Chosen_CPU | CPU_Usage, Price ) {
+    ( High, High ) 0.99, 0.01, 0.0, 0.0, 0.0;
+    ( High, Medium ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( High, Low ) 0.0, 0.0, 1.0, 0.0, 0.0;
+    ( Medium, High ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( Medium, Medium ) 0.0, 0.0, 1.0, 0.0, 0.0;
+    ( Medium, Low ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, High ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, Medium ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, Low ) 0.0, 0.0, 0.0, 0.0, 1.0;
+
+}
+probability ( Chosen_GPU | GPU_Usage, Price ) {
+    ( High, High ) 0.99, 0.01, 0.0, 0.0, 0.0;
+    ( High, Medium ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( High, Low ) 0.0, 0.0, 1.0, 0.0, 0.0;
+    ( Medium, High ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( Medium, Medium ) 0.0, 0.0, 1.0, 0.0, 0.0;
+    ( Medium, Low ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, High ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( Low, Medium ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, Low ) 0.0, 0.0, 0.0, 0.0, 1.0;
+
+}
+probability ( Chosen_RAM | RAM_Usage, Price ) {
+    ( High, High ) 0.99, 0.01, 0.0, 0.0, 0.0;
+    ( High, Medium ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( High, Low ) 0.0, 0.0, 1.0, 0.0, 0.0;
+    ( Medium, High ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( Medium, Medium ) 0.0, 0.0, 1.0, 0.0, 0.0;
+    ( Medium, Low ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, High ) 0.0, 1.0, 0.0, 0.0, 0.0;
+    ( Low, Medium ) 0.0, 0.0, 0.0, 1.0, 0.0;
+    ( Low, Low ) 0.0, 0.0, 0.0, 0.0, 1.0;
+
+}
+probability ( GPU_Usage | Usage, Price ) {
+    ( General, High ) 0.05, 0.3, 0.65;
+    ( General, Medium ) 0.05, 0.15, 0.8;
+    ( General, Low ) 0.0, 0.1, 0.9;
+    ( Programing, High ) 0.3, 0.5, 0.2;
+    ( Programing, Medium ) 0.15, 0.35, 0.5;
+    ( Programing, Low ) 0.05, 0.2, 0.75;
+    ( VideoEditing, High ) 0.9, 0.08, 0.02;
+    ( VideoEditing, Medium ) 0.7, 0.25, 0.05;
+    ( VideoEditing, Low ) 0.5, 0.4, 0.1;
+    ( Gaming, High ) 0.9, 0.08, 0.02;
+    ( Gaming, Medium ) 0.7, 0.2, 0.1;
+    ( Gaming, Low ) 0.35, 0.5, 0.15;
+
+}
+probability ( Price | Usage ) {
+    ( General ) 0.1, 0.3, 0.6;
+    ( Programing ) 0.3, 0.6, 0.1;
+    ( VideoEditing ) 0.7, 0.25, 0.05;
+    ( Gaming ) 0.6, 0.35, 0.05;
+
+}
+probability ( RAM_Usage | Usage, Price ) {
+    ( General, High ) 0.1, 0.15, 0.75;
+    ( General, Medium ) 0.05, 0.1, 0.85;
+    ( General, Low ) 0.0, 0.05, 0.95;
+    ( Programing, High ) 0.6, 0.25, 0.15;
+    ( Programing, Medium ) 0.3, 0.5, 0.2;
+    ( Programing, Low ) 0.2, 0.35, 0.45;
+    ( VideoEditing, High ) 0.95, 0.05, 0.0;
+    ( VideoEditing, Medium ) 0.8, 0.15, 0.05;
+    ( VideoEditing, Low ) 0.7, 0.2, 0.1;
+    ( Gaming, High ) 0.9, 0.1, 0.0;
+    ( Gaming, Medium ) 0.75, 0.2, 0.05;
+    ( Gaming, Low ) 0.6, 0.25, 0.15;
+
+}
+probability ( Usage ) {
+    table 0.45, 0.08, 0.12, 0.35 ;
+}

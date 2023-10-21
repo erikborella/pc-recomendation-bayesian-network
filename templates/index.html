@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link
+			type="text/css"
+			rel="stylesheet"
+			href="{{ url_for('static', filename='css/materialize.min.css') }}"
+			media="screen,projection"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Recomendação de Computador</title>
+	</head>
+
+	<body>
+		<nav>
+			<div class="nav-wrapper deep-purple">
+				<a href="#" class="brand-logo center">Recomendação de Computador</a>
+			</div>
+		</nav>
+
+        <div class="container">
+            <br>
+            <br>
+
+            <div class="row">
+                <div class="col s12">
+                    <h5>O que pretende fazer com o seu computador:</h5>
+                </div>
+            </div>
+
+			<div class="row">
+				<div class="col m3 s12">
+					<p>
+						<label>
+							<input value="General" type="radio" name="usageGroup">
+							<span>Uso Geral</span>
+						</label>
+					</p>
+				</div>
+				<div class="col m3 s12">
+					<p>
+						<label>
+							<input value="Programing" type="radio" name="usageGroup">
+							<span>Programação</span>
+						</label>
+					</p>
+				</div>
+				<div class="col m3 s12">
+					<p>
+						<label>
+							<input value="VideoEditing" type="radio" name="usageGroup">
+							<span>Edição de Videos</span>
+						</label>
+					</p>
+				</div>
+				<div class="col m3 s12">
+					<p>
+						<label>
+							<input value="Gaming" type="radio" name="usageGroup">
+							<span>Jogar</span>
+						</label>
+					</p>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+
+			<div class="row">
+				<div class="col s12">
+					<h5>(Opcional) Quanto deseja gastar:</h5>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col m4 s12">
+					<p>
+						<label>
+							<input name="priceGroup" value="Low" type="radio">
+							<span>Pouco</span>
+						</label>
+					</p>
+				</div>
+				<div class="col m4 s12">
+					<p>
+						<label>
+							<input name="priceGroup" value="Medium" type="radio">
+							<span>Médio</span>
+						</label>
+					</p>
+				</div>
+				<div class="col m3 s12">
+					<p>
+						<label>
+							<input name="priceGroup" value="High" type="radio">
+							<span>Muito</span>
+						</label>
+					</p>
+				</div>
+				<div class="col m1 s12">
+					<a id="clear-price-btn" class="btn-floating btn-large waves-effect waves-light deep-purple">
+						<i class="material-icons">clear</i>
+					</a>
+				</div>
+			</div>
+
+			<div class="divider"></div>
+			
+			<br>
+
+			<div class="center">
+				<a id="get-recommendation-button" class="waves-effect waves-light btn deep-purple">Obter recomendação de peças</a>
+			</div>
+
+			<br>
+
+			<div class="divider"></div>
+
+			<br>
+
+			<!-- Loader Spinner -->
+			<div id="loading-recommendation-spinner" class="hide">
+				<div class="center ">
+					<div class="preloader-wrapper big active">
+						<div class="spinner-layer spinner-blue">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div>
+							<div class="gap-patch">
+								<div class="circle"></div>
+							</div>
+							<div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+				
+						<div class="spinner-layer spinner-red">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div>
+							<div class="gap-patch">
+								<div class="circle"></div>
+							</div>
+							<div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+				
+						<div class="spinner-layer spinner-yellow">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div>
+							<div class="gap-patch">
+								<div class="circle"></div>
+							</div>
+							<div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+				
+						<div class="spinner-layer spinner-green">
+							<div class="circle-clipper left">
+								<div class="circle"></div>
+							</div>
+							<div class="gap-patch">
+								<div class="circle"></div>
+							</div>
+							<div class="circle-clipper right">
+								<div class="circle"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="center">
+					Carregando recomendações...
+				</div>
+			</div>
+			<!-- End Loader Spinner -->
+
+			<div id="recommendation-cards" class="hide">
+				<div class="row">
+					<div class="col m4 s12">
+						<div class="card">
+							<div class="card-image">
+							<img id="cpu_img" src="">
+						</div>
+						<div class="card-content">
+							<span class="card-title">Processador</span>
+							<p>Uso: <span id="cpu_usage"></span></p>
+							<p>modelo: <span id="cpu_name"></span></p>
+							<a id="cpu_link" href="">link</a>
+						</div>
+					</div>
+					</div>
+
+					<div class="col m4 s12">
+					<div class="card">
+						<div class="card-image">
+							<img id="gpu_img" src="">
+						</div>
+						<div class="card-content">
+							<span class="card-title">Placa de Video</span>
+							<p>Uso: <span id="gpu_usage"></span></p>
+							<p>modelo: <span id="gpu_name"></span></p>
+							<a id="gpu_link" href="">link</a>
+						</div>
+					</div>
+					</div>
+
+					<div class="col m4 s12">
+					<div class="card">
+						<div class="card-image">
+							<img id="ram_img" src="">
+						</div>
+						<div class="card-content">
+							<span class="card-title">RAM</span>
+							<p>Uso: <span id="ram_usage"></span></p>
+							<p>modelo: <span id="ram_name"></span></p>
+							<a id="ram_link" href="">link</a>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+        </div>
+
+		<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+	</body>
+</html>
