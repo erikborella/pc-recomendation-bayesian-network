@@ -32,8 +32,19 @@
             A partir dai a rede consegue nos dar o componente mais apropriado baseado nos dados que o usuário deu.</p>
             <br>
             
+            <img class="materialboxed" width="650" src="{{ url_for('static', filename='img/bayesian-network.png') }}">
+
+            <p>A rede foi inicialmente desenvolvida usando o software <a href="https://www.norsys.com/netica.html">Netica</a> e depois a rede foi convertida para ser usado com a biblioteca <a href="https://pgmpy.org/models/bayesiannetwork.html">pgmpy</a>.</p>
+
+            <p>O servidor do site então foi desenvolvido usando <a href="https://flask.palletsprojects.com/en/3.0.x/">Flask</a>, uma biblioteca para Python para a criação de servidores. Para o desenvolvimento do site em site foi usado a biblioteca para CSS <a href="https://materializecss.com/about.html">materialize.css</a>.</p>
+
+            <p>É feito então uma integração com o modelo do pgmpy com uma rota no Flask, que, ao enviar as informações de uso e preço a rota retorna os dados de uso e do componente escolhido. Com base nisso é então exibido as informações para o usuário junto com uma imagem e link para a compra do componente.</p>
+
+            <p>Todo o código fonte do projeto está hospedado no Github e pode ser acessado através desse link: <a href="https://github.com/erikborella/pc-recomendation-bayesian-network">https://github.com/erikborella/pc-recomendation-bayesian-network</a>.</p>
+                                
         </div>
 
 		<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/about.js') }}"></script>
 	</body>
 </html>
